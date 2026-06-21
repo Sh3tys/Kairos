@@ -10,10 +10,33 @@ const verifyDeckOwnership = async (deckId, userId) => {
   return { valid: true, deck };
 };
 
+const calculateDeckStatistics = async (deck) => {
+  const cards = await Card.find({ deck_id: deck._id });
+  const now = Date.now();
+
+  const totalCards = cards.length;
+  const newCards = cards.filter((card) => card.status === 0).length;
+  const reviewCards = cards.filter(
+    (card) => card.status !== 0 && new Date(card.expirationDate).getTime() <= now,
+  ).length;
+
+  return {
+    ...deck.toObject(),
+    totalCards,
+    newCards,
+    reviewCards,
+    cardCount: totalCards,
+  };
+};
+
 const getAllDecks = async (req, res) => {
   try {
     const decks = await Deck.find({ user_id: req.userId });
-    res.json({ decks });
+    const decksWithStats = await Promise.all(
+      decks.map((deck) => calculateDeckStatistics(deck)),
+    );
+
+    res.json({ decks: decksWithStats });
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch decks" });
   }

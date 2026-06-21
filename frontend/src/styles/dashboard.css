@@ -162,7 +162,6 @@
   padding: 2rem;
 }
 
-.hero-kicker,
 .section-label,
 .stat-label,
 .profile-label {
@@ -222,11 +221,6 @@
   color: #0f172a;
 }
 
-.profile-meta p {
-  color: #64748b;
-  line-height: 1.5;
-}
-
 .profile-details {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -270,12 +264,6 @@
   line-height: 1.2;
 }
 
-.stat-card p {
-  color: #64748b;
-  line-height: 1.55;
-  font-size: 0.95rem;
-}
-
 .dashboard-header {
   margin: 1.2rem 0 1rem;
   display: flex;
@@ -287,10 +275,6 @@
   margin: 0;
   color: #0f172a;
   font-size: 1.75rem;
-}
-
-.dashboard-header .section-label {
-  color: #64748b;
 }
 
 .empty-state {

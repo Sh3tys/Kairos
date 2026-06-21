@@ -64,6 +64,18 @@ export default function Dashboard() {
     navigate("/login");
   };
 
+  const handleQuickDeck = async () => {
+    try {
+      const response = await deckAPI.createDeck(
+        "New Deck",
+        "Add a description for your deck",
+      );
+      navigate(`/deck/${response.data.deck._id}`);
+    } catch (err) {
+      setError(err.response?.data?.error || "Failed to create deck");
+    }
+  };
+
   const sortedDecks = [...decks].sort(
     (firstDeck, secondDeck) =>
       new Date(secondDeck.updatedAt || secondDeck.createdAt) -
@@ -116,24 +128,19 @@ export default function Dashboard() {
       <main className="dashboard-content">
         <section className="dashboard-hero">
           <div className="hero-copy">
-            <p className="hero-kicker">Spaced repetition workspace</p>
-            <h2>
-              {user?.username
-                ? `${user.username}, prêt pour une session claire et rapide ?`
-                : "Votre espace de révision est prêt."}
-            </h2>
-            <p className="hero-text">
-              Reprenez vos cartes, créez de nouveaux decks et gardez votre
-              progression sous contrôle depuis un seul endroit.
-            </p>
+            <h2>{user?.username || "Utilisateur"}</h2>
+            <p className="hero-text">{deckCount} deck{deckCount > 1 ? "s" : ""}</p>
 
             <div className="hero-actions">
               <button onClick={() => setShowModal(true)} className="btn-primary">
                 + Create Deck
               </button>
+              <button onClick={handleQuickDeck} className="btn-secondary">
+                Quick deck
+              </button>
               {latestDeck && (
                 <button
-                  onClick={() => navigate(`/review/${latestDeck._id}`)}
+                  onClick={() => navigate(`/review/deck/${latestDeck._id}`)}
                   className="btn-secondary"
                 >
                   Study last deck
@@ -147,9 +154,7 @@ export default function Dashboard() {
               {user?.username ? user.username.slice(0, 1).toUpperCase() : "K"}
             </div>
             <div className="profile-meta">
-              <p className="profile-label">Profil actif</p>
               <h3>{user?.username || "Utilisateur"}</h3>
-              <p>{user?.email || "Connecté à votre espace Kairos"}</p>
             </div>
 
             <div className="profile-details">
@@ -158,7 +163,7 @@ export default function Dashboard() {
                 <strong>{deckCount}</strong>
               </div>
               <div>
-                <span>Membre depuis</span>
+                <span>Since</span>
                 <strong>{createdLabel || "-"}</strong>
               </div>
             </div>
@@ -167,34 +172,19 @@ export default function Dashboard() {
 
         <section className="dashboard-stats" aria-label="Dashboard metrics">
           <article className="stat-card">
-            <span className="stat-label">Decks total</span>
             <strong>{deckCount}</strong>
-            <p>Vos collections en cours de révision.</p>
           </article>
           <article className="stat-card">
-            <span className="stat-label">Deck récent</span>
             <strong>{latestDeck?.title || "Aucun deck"}</strong>
-            <p>
-              {latestDeck
-                ? latestDeck.description || "Sans description"
-                : "Créez votre premier deck pour commencer."}
-            </p>
           </article>
           <article className="stat-card">
-            <span className="stat-label">Focus</span>
-            <strong>Révision courte</strong>
-            <p>10 minutes par session suffisent pour consolider.</p>
+            <strong>Daily</strong>
           </article>
         </section>
 
         <section className="dashboard-header">
-          <div>
-            <p className="section-label">Your decks</p>
-            <h2>My Decks</h2>
-          </div>
-          <button onClick={() => setShowModal(true)} className="btn-primary">
-            + Create Deck
-          </button>
+          <h2>Decks</h2>
+          <button onClick={() => setShowModal(true)} className="btn-primary">+ Create Deck</button>
         </section>
 
         {error && <div className="error-message">{error}</div>}
@@ -202,14 +192,8 @@ export default function Dashboard() {
         <div className="decks-grid">
           {sortedDecks.length === 0 ? (
             <div className="empty-state">
-              <h3>Aucun deck pour le moment</h3>
-              <p>
-                Créez un deck pour démarrer vos révisions et voir votre
-                progression ici.
-              </p>
-              <button onClick={() => setShowModal(true)} className="btn-primary">
-                Create your first deck
-              </button>
+              <h3>Aucun deck</h3>
+              <button onClick={() => setShowModal(true)} className="btn-primary">Create</button>
             </div>
           ) : (
             sortedDecks.map((deck) => (

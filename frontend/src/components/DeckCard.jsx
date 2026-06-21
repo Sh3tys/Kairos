@@ -22,7 +22,7 @@ export default function DeckCard({ deck, onDeleted }) {
   };
 
   const handleStudy = () => {
-    navigate(`/review/${deck._id}`);
+    navigate(`/review/deck/${deck._id}`);
   };
 
   const handleEdit = () => {
