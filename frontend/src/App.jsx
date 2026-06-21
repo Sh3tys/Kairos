@@ -9,6 +9,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Review from "./pages/Review";
+import DeckEditor from "./pages/DeckEditor";
+import ReviewFinish from "./pages/ReviewFinish";
 import "./styles/app.css";
 
 function App() {
@@ -18,7 +20,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/deck/:deckId" element={<DeckEditor />} />
         <Route path="/review/:deckId" element={<Review />} />
+        <Route path="/review-finish/:deckId" element={<ReviewFinish />} />
         <Route path="/" element={<Navigate to="/dashboard" />} />
       </Routes>
     </Router>

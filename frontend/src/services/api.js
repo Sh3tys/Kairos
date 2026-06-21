@@ -34,6 +34,10 @@ export const authAPI = {
   login: (email, password) => api.post("/auth/login", { email, password }),
 };
 
+export const userAPI = {
+  getProfile: () => api.get("/user/profile"),
+};
+
 export const deckAPI = {
   getAllDecks: () => api.get("/decks"),
   getDeckById: (id) => api.get(`/decks/${id}`),

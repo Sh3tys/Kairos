@@ -25,6 +25,10 @@ export default function DeckCard({ deck, onDeleted }) {
     navigate(`/review/${deck._id}`);
   };
 
+  const handleEdit = () => {
+    navigate(`/deck/${deck._id}`);
+  };
+
   return (
     <div className="deck-card">
       <h3>{deck.title}</h3>
@@ -36,10 +40,7 @@ export default function DeckCard({ deck, onDeleted }) {
         <button onClick={handleStudy} className="btn-study">
           Study
         </button>
-        <button
-          onClick={() => navigate(`/deck/${deck._id}`)}
-          className="btn-edit"
-        >
+        <button onClick={handleEdit} className="btn-edit">
           Edit
         </button>
         <button

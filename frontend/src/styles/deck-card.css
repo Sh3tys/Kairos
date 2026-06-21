@@ -1,34 +1,41 @@
 .deck-card {
-  background: white;
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(248, 250, 252, 0.98) 100%);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 22px;
+  padding: 1.4rem;
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
 }
 
 .deck-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
 }
 
 .deck-card h3 {
   margin: 0 0 0.5rem 0;
-  color: #333;
+  color: #0f172a;
+  font-size: 1.2rem;
 }
 
 .deck-card p {
-  color: #666;
-  font-size: 0.9rem;
+  color: #64748b;
+  font-size: 0.95rem;
   margin-bottom: 1rem;
   min-height: 1.5rem;
+  line-height: 1.55;
 }
 
 .deck-stats {
   margin-bottom: 1rem;
-  color: #999;
+  color: #0f172a;
   font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .deck-actions {
@@ -43,19 +50,33 @@
 }
 
 .btn-study {
-  background-color: #28a745;
+  background: linear-gradient(135deg, #14b8a6 0%, #10b981 100%);
   color: white;
 }
 
 .btn-study:hover:not(:disabled) {
-  background-color: #218838;
+  filter: brightness(1.03);
 }
 
 .btn-edit {
-  background-color: #007bff;
+  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
   color: white;
 }
 
 .btn-edit:hover:not(:disabled) {
-  background-color: #0056b3;
+  filter: brightness(1.03);
+}
+
+@media (max-width: 768px) {
+  .deck-card {
+    border-radius: 20px;
+  }
+
+  .deck-actions {
+    flex-direction: column;
+  }
+
+  .deck-actions button {
+    width: 100%;
+  }
 }
