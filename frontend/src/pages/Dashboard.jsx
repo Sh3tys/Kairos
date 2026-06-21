@@ -119,6 +119,9 @@ export default function Dashboard() {
             <span className="user-chip-label">Compte</span>
             <strong>{user?.username || "Utilisateur"}</strong>
           </div>
+          <button onClick={() => navigate("/profile")} className="btn-ghost">
+            Profile
+          </button>
           <button onClick={handleLogout} className="btn-ghost">
             Logout
           </button>

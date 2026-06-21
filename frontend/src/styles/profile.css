@@ -1,0 +1,100 @@
+.profile-page {
+  align-items: flex-start;
+  padding-top: 2rem;
+}
+
+.profile-card-shell {
+  width: min(920px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.profile-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.profile-header-row h1 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #64748b;
+  margin-bottom: 0.3rem;
+}
+
+.profile-header-row h2 {
+  font-size: 2rem;
+  color: #0f172a;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.profile-form label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+  color: #475569;
+}
+
+.password-box {
+  padding: 1rem;
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+}
+
+.password-box-header {
+  margin-bottom: 1rem;
+}
+
+.password-box-header h3 {
+  color: #0f172a;
+  margin-bottom: 0.2rem;
+}
+
+.password-box-header p {
+  color: #64748b;
+  font-size: 0.92rem;
+}
+
+.password-hints {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.35rem 0.75rem;
+  margin-top: 0.35rem;
+  padding-left: 1rem;
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+.auth-hints {
+  margin: -0.35rem 0 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .profile-card-shell {
+    width: 100%;
+  }
+
+  .profile-header-row,
+  .form-grid,
+  .password-hints {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-header-row {
+    flex-direction: column;
+  }
+}

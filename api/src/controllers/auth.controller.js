@@ -2,12 +2,49 @@ const User = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+const passwordPolicy = {
+  minLength: 8,
+  hasUppercase: /[A-Z]/,
+  hasLowercase: /[a-z]/,
+  hasNumber: /\d/,
+  hasSpecial: /[^A-Za-z0-9]/,
+};
+
+const validatePasswordStrength = (password) => {
+  if (!password || password.length < passwordPolicy.minLength) {
+    return "Password must be at least 8 characters long";
+  }
+
+  if (!passwordPolicy.hasUppercase.test(password)) {
+    return "Password must contain at least one uppercase letter";
+  }
+
+  if (!passwordPolicy.hasLowercase.test(password)) {
+    return "Password must contain at least one lowercase letter";
+  }
+
+  if (!passwordPolicy.hasNumber.test(password)) {
+    return "Password must contain at least one number";
+  }
+
+  if (!passwordPolicy.hasSpecial.test(password)) {
+    return "Password must contain at least one special character";
+  }
+
+  return null;
+};
+
 const register = async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
     if (!username || !email || !password) {
       return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    const passwordError = validatePasswordStrength(password);
+    if (passwordError) {
+      return res.status(400).json({ error: passwordError });
     }
 
     const existUser = await User.findOne({ email: email.toLowerCase() });

@@ -36,6 +36,7 @@ export const authAPI = {
 
 export const userAPI = {
   getProfile: () => api.get("/user/profile"),
+  updateProfile: (payload) => api.put("/user/profile", payload),
 };
 
 export const deckAPI = {

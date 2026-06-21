@@ -75,6 +75,7 @@ Anki_revision/
 - Node.js 18+
 - MongoDB (local or [MongoDB Atlas](https://www.mongodb.com/cloud/atlas))
 - HuggingFace API token (for AI card generation)
+- Hugging Face model choice note: see [docs/huggingface-llm.md](docs/huggingface-llm.md)
 
 ### 1️⃣ API Setup
 
@@ -93,6 +94,8 @@ PORT=5000
 MONGO_URI=mongodb+srv://Shetys:q%2Ag%23V%5E8%21DF3%2AB269o29%24%2A%24%24r%23X685K@shetys.hqm13re.mongodb.net/?appName=Shetys
 JWT_SECRET=your-secret-key-at-least-32-characters-long
 HUGGINGFACE_API_TOKEN=hf_xxxxxxxxxxxxx
+HF_MODEL_ID=Qwen/Qwen2.5-7B-Instruct:cheapest
+HF_MODEL_IDS=Qwen/Qwen2.5-7B-Instruct:cheapest,Qwen/Qwen2.5-7B-Instruct:fastest,HuggingFaceH4/zephyr-7b-beta:cheapest
 ```
 
 Start the API:
@@ -234,6 +237,8 @@ Follow prompts, then set environment variables in Vercel dashboard:
 MONGO_URI=<your-mongodb-uri>
 JWT_SECRET=<your-secret-key>
 HUGGINGFACE_API_TOKEN=<your-token>
+HF_MODEL_ID=Qwen/Qwen2.5-7B-Instruct:cheapest
+HF_MODEL_IDS=Qwen/Qwen2.5-7B-Instruct:cheapest,Qwen/Qwen2.5-7B-Instruct:fastest,HuggingFaceH4/zephyr-7b-beta:cheapest
 ```
 
 Note your API URL: `https://your-api-domain.vercel.app`
@@ -342,6 +347,28 @@ SESSION_SECRET=votre_cle_secrete_tres_securisee_ici_changez_moi
 # Clé API pour l'IA Hugging Face(https://huggingface.co/)
 
 HUGGINGFACE_API_TOKEN=votre_cle_api_huggingface_ici_changez_moi
+HF_MODEL_ID=Qwen/Qwen2.5-7B-Instruct:cheapest
+HF_MODEL_IDS=Qwen/Qwen2.5-7B-Instruct:cheapest,Qwen/Qwen2.5-7B-Instruct:fastest,HuggingFaceH4/zephyr-7b-beta:cheapest
+
+## IA Hugging Face et modèles recommandés
+
+Le moteur de génération de slides repose sur Hugging Face Inference Providers. L'application utilise un flux en deux étapes pour éviter les doublons: d'abord des blueprints de slides distincts, puis une génération slide par slide avec contrôle local des questions déjà vues.
+
+Modèles recommandés pour les slides:
+
+- `Qwen/Qwen2.5-7B-Instruct:cheapest` comme valeur par défaut. Très bon pour le français et les sorties structurées.
+- `google/gemma-2-9b-it:cheapest` pour une génération plus robuste si tu acceptes les conditions d'accès Google.
+- `HuggingFaceH4/zephyr-7b-beta:cheapest` pour un modèle chat léger et simple.
+- `mistralai/Mistral-7B-Instruct-v0.3` si tu veux une option Apache 2.0, surtout en local ou en endpoint dédié.
+
+Si tu veux changer le modèle sans modifier le code, définis `HF_MODEL_ID` et éventuellement `HF_MODEL_IDS` dans l'environnement de l'API.
+
+Pour des slides vraiment différentes:
+
+- limite le sujet à un thème précis;
+- utilise un prompt avec plusieurs angles (définition, exemple, correction, comparaison, application);
+- préfère des lots de 5 à 10 slides bien ciblés plutôt qu'un gros lot trop large;
+- garde le texte source le plus propre et le plus concentré possible.
 
 ````
 

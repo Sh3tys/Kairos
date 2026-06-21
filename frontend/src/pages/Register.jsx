@@ -3,6 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { authAPI } from "../services/api";
 import "../styles/auth.css";
 
+const passwordHints = [
+  "8 characters minimum",
+  "One uppercase letter",
+  "One lowercase letter",
+  "One number",
+  "One special character",
+];
+
 export default function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -54,8 +62,14 @@ export default function Register() {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            minLength={8}
             required
           />
+          <ul className="password-hints auth-hints">
+            {passwordHints.map((hint) => (
+              <li key={hint}>{hint}</li>
+            ))}
+          </ul>
           <button type="submit" disabled={loading}>
             {loading ? "Registering..." : "Register"}
           </button>
