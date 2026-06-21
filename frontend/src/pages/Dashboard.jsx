@@ -52,7 +52,7 @@ export default function Dashboard() {
   return (
     <div className="dashboard">
       <nav className="navbar">
-        <h1>Feynman</h1>
+        <h1>Kairos</h1>
         <button onClick={handleLogout}>Logout</button>
       </nav>
 

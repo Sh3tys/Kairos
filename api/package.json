@@ -1,7 +1,7 @@
 {
-  "name": "feynman-api",
+  "name": "kairos-api",
   "version": "1.0.0",
-  "description": "Feynman spaced repetition learning API",
+  "description": "Kairos spaced repetition learning API",
   "type": "commonjs",
   "main": "server.js",
   "scripts": {

@@ -1,4 +1,4 @@
-# Feynman - Spaced Repetition Learning Platform
+# Kairos - Spaced Repetition Learning Platform
 
 <div align="center">
 
@@ -14,7 +14,7 @@ A fully API-driven learning platform with separate backend API and frontend UI, 
 
 ## 🏗️ Architecture
 
-**Feynman** is now a modular, API-first platform:
+**Kairos** is now a modular, API-first platform:
 
 - **API Backend** (`/api`) - RESTful JSON API with JWT authentication
 - **Frontend** (`/frontend`) - React + Vite SPA consuming the API
@@ -90,7 +90,7 @@ Edit `api/.env`:
 
 ```env
 PORT=5000
-MONGO_URI=mongodb://localhost:27017/feynman
+MONGO_URI=mongodb+srv://Shetys:q%2Ag%23V%5E8%21DF3%2AB269o29%24%2A%24%24r%23X685K@shetys.hqm13re.mongodb.net/?appName=Shetys
 JWT_SECRET=your-secret-key-at-least-32-characters-long
 HUGGINGFACE_API_TOKEN=hf_xxxxxxxxxxxxx
 ```
